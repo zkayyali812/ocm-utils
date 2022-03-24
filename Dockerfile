@@ -3,6 +3,10 @@ FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
 RUN microdnf update -y && microdnf install -y tar gzip curl jq wget git make
 
+# Install cm-cli
+RUN curl -sLO https://github.com/stolostron/cm-cli/releases/download/v1.0.7/cm_linux_amd64.tar.gz -o cm_linux_amd64.tar.gz && \
+    tar -xvzf cm_linux_amd64.tar.gz && chmod +x cm && mv cm /usr/local/bin/cm && \
+    rm cm_linux_amd64.tar.gz
 
 # Install oc/kubectl
 RUN curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz -o openshift-client-linux.tar.gz && \
