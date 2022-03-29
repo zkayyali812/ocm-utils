@@ -1,7 +1,20 @@
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
 
-RUN microdnf update -y && microdnf install -y tar gzip curl jq wget git make
+RUN microdnf update -y && microdnf install -y tar gzip curl jq wget git make unzip
+
+
+# Install aws-cli
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -rf awscliv2.zip && \
+    rm -rf aws
+
+# Install rosa-cli
+RUN curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/rosa/latest/rosa-linux.tar.gz -o rosa-linux.tar.gz && \
+    tar -xvzf rosa-linux.tar.gz && chmod +x rosa && mv rosa /usr/local/bin/rosa && \
+    rm rosa-linux.tar.gz
 
 # Install cm-cli
 RUN curl -sLO https://github.com/stolostron/cm-cli/releases/download/v1.0.7/cm_linux_amd64.tar.gz -o cm_linux_amd64.tar.gz && \
