@@ -1,6 +1,5 @@
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
-
 RUN microdnf update -y && microdnf install -y tar gzip curl jq wget git make unzip
 
 # Install oc/kubectl
@@ -38,5 +37,11 @@ RUN curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/rosa/latest/
 RUN curl -sLO https://github.com/stolostron/cm-cli/releases/download/v1.0.7/cm_linux_amd64.tar.gz -o cm_linux_amd64.tar.gz && \
     tar -xvzf cm_linux_amd64.tar.gz && chmod +x cm && mv cm /usr/local/bin/cm && \
     rm cm_linux_amd64.tar.gz
+
+# Install ocm cli
+RUN mkdir -p ~/bin && \
+    curl -Lo ~/bin/ocm https://github.com/openshift-online/ocm-cli/releases/download/v0.1.62/ocm-linux-amd64 && \
+    chmod +x ~/bin/ocm && \
+    mv ~/bin/ocm /usr/local/bin/ocm
 
 ENV PATH=${PATH}:/usr/local/go/bin
