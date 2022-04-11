@@ -10,7 +10,7 @@ RUN curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/o
     chmod +x kubectl && mv kubectl /usr/local/bin/kubectl && rm openshift-client-linux.tar.gz
 
 # Install yq
-RUN curl -sLO https://github.com/mikefarah/yq/releases/download/v4.2.0/yq_linux_amd64 -o yq_linux_amd64 &&\
+RUN curl -sLO https://github.com/mikefarah/yq/releases/download/v4.16.1/yq_linux_amd64 -o yq_linux_amd64 &&\
     mv yq_linux_amd64 /usr/local/bin/yq && \
     chmod +x /usr/local/bin/yq
 
