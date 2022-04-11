@@ -1,6 +1,8 @@
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
-RUN microdnf update -y && microdnf install -y tar gzip curl jq wget git make unzip
+RUN microdnf update -y && microdnf install -y tar gzip curl jq wget git make unzip python38 python38-pip
+
+RUN python3 -m pip install ansible
 
 # Install oc/kubectl
 RUN curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz -o openshift-client-linux.tar.gz && \
